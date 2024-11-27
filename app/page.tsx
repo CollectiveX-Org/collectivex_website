@@ -4,7 +4,7 @@ import Hero from '@/app/Hero/page'
 // import Testimonial from '@/components/Testimonial/page'
 import Footer from '@/components/footer/page'
 // import TrustedBy from '@/app/Trust/page'
-
+import Cards from '@/app/Cards/page'
 const page = () => {
   return (
     <div className=''>
@@ -12,7 +12,9 @@ const page = () => {
       <Hero />
       {/* <TrustedBy /> */}
       {/* <Testimonial /> */}
+      <Cards />
       <Footer /> 
+     
     </div>
   )
 }
