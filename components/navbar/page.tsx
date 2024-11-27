@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -43,10 +44,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="hidden md:block bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-7 py-2.5 rounded-2xl font-semibold tracking-wide transition-all duration-200 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
-              Connect Wallet
-            </button>
-            
+            <WalletMultiButton className=" hidden md:block  text-white px-7 py-2.5 rounded-2xl font-semibold tracking-wide transition-all duration-200 transform hover:scale-105 hover:shadow-lg " />
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden text-violet-200 hover:text-white"
@@ -108,9 +106,7 @@ const Navbar = () => {
               >
                 Docs
               </Link>
-              <button className="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-7 py-2.5 rounded-2xl font-semibold tracking-wide transition-all duration-200 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 w-full">
-                Connect Wallet
-              </button>
+              <WalletMultiButton className="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-7 py-2.5 rounded-2xl font-semibold tracking-wide transition-all duration-200 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 w-full" />
             </div>
           </div>
         )}
