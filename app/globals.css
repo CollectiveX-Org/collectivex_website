@@ -7,3 +7,6 @@ body {
   background-color: #110221;
 }
 
+.bg-size-200 {
+  background-size: 200% auto;
+}
