@@ -1,13 +1,20 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useWallet } from "@solana/wallet-adapter-react"
 import Image from 'next/image'
 import BalanceChart from '@/components/ui/charts/BalanceChart'
+import CreateSquadModal from './CreateSquadModal'
 
 const CreateCollective = () => {
   const { publicKey } = useWallet()
-//   const [step, setStep] = useState(1)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+
+  const handleCreateSquad = (data: { name: string; description: string; image?: File }) => {
+    console.log('Creating squad with data:', data)
+    // Handle squad creation logic here
+    setIsCreateModalOpen(false)
+  }
 
   // If wallet is not connected, show connect wallet step
   if (!publicKey) {
@@ -40,11 +47,43 @@ const CreateCollective = () => {
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto">
+        {/* Add Create Squad Section */}
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="mb-4">
+            <Image 
+              src="/icons/squads-icon.svg" 
+              alt="Squads Icon" 
+              width={64} 
+              height={64} 
+              className="mx-auto"
+            />
+          </div>
+          <h2 className="text-gray-400 mb-2">Introducing Squads</h2>
+          <h1 className="text-4xl text-white font-bold mb-8">
+            Management of developer<br />
+            and treasury assets for on-chain organizations
+          </h1>
+          <motion.button 
+            className="bg-white text-black px-6 py-3 rounded-lg font-medium 
+                     hover:bg-opacity-90 transition-all duration-200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            + Create Squad
+          </motion.button>
+        </motion.div>
+
         {/* Balance Section */}
         <motion.div 
           className="bg-[#2A3744] rounded-xl p-6 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -76,7 +115,7 @@ const CreateCollective = () => {
           className="bg-[#2A3744] rounded-xl p-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.3 }}
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
@@ -106,6 +145,12 @@ const CreateCollective = () => {
           </div>
         </motion.div>
       </div>
+
+      <CreateSquadModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onNext={handleCreateSquad}
+      />
     </div>
   )
 }
