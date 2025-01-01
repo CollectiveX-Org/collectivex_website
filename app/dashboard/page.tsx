@@ -65,7 +65,7 @@ const Dashboard = () => {
   return (
     <div className="p-4 min-h-screen text-white">
       {/* Main Overview Section */}
-      <div className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 mb-6 border border-white/5">
+      <div className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 mb-6 border border-white/5 max-w-5xl mx-auto">
         <h1 className="text-xl font-medium mb-6 flex items-center gap-2">
           Dashboard
           <span className="w-2.5 h-2.5 rounded-full bg-violet-500 animate-pulse"></span>
@@ -178,7 +178,7 @@ const Dashboard = () => {
       </div>
 
       {/* Transactions Section */}
-      <div className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 border border-white/5">
+      <div className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 border border-white/5 max-w-5xl mx-auto">
         <h2 className="text-sm text-gray-400 mb-4 font-medium">Inflows and Outflows</h2>
         <div className="space-y-3 max-h-[280px] overflow-y-auto pr-2">
           {transactions.map((transaction) => (
