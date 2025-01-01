@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 import { MdDashboard, MdSwapHoriz, MdWaterDrop, MdSend, MdRefresh } from 'react-icons/md'
 import { FaStream, FaExchangeAlt } from 'react-icons/fa'
-import { BiTransfer } from 'react-icons/bi'
+import { BiTransfer, BiUserPlus } from 'react-icons/bi'
 import { IoWalletOutline } from 'react-icons/io5'
 import { IoMdNotifications, IoMdSettings } from 'react-icons/io'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -21,6 +21,11 @@ const navItems = [
     label: 'Limit Order',
     icon: FaExchangeAlt,
     href: '/dashboard/limit-order',
+  },
+  {
+    label: 'Members',
+    icon: BiUserPlus,
+    href: '/dashboard/members',
   },
   {
     label: 'Streams',
