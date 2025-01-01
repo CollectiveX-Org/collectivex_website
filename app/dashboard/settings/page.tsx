@@ -123,7 +123,7 @@ export default function SettingsPage() {
             <div>
               <h3 className="text-white mb-1">Time Lock</h3>
               <p className="text-sm text-gray-400">
-                You are able to set a timelock period (in seconds) for which a transaction will be frozen when reaching Ready state and won't be able to be Executed until that time period passes.
+                You are able to set a timelock period (in seconds) for which a transaction will be frozen when reaching Ready state and won&apos;t be able to be Executed until that time period passes.
               </p>
             </div>
             <select
