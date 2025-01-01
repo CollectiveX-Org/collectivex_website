@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import { useRouter } from 'next/navigation';
 // import Image from 'next/image'
 
 interface ReviewProps {
@@ -18,6 +19,7 @@ interface ReviewProps {
 
 const Review = ({ memberDetails, onBack, onConfirm }: ReviewProps) => {
   const deployFee = 0.0528; // This could be fetched from an API or config
+  const router = useRouter(); // Initialize useRouter
 
   return (
     <div className="space-y-6">
@@ -86,7 +88,7 @@ const Review = ({ memberDetails, onBack, onConfirm }: ReviewProps) => {
             Back
           </button>
           <button
-            onClick={onConfirm}
+            onClick={() => router.push('/dashboard')}
             className="px-8 py-3 bg-white text-black rounded-lg hover:bg-opacity-90 transition-colors font-medium"
           >
             Confirm
