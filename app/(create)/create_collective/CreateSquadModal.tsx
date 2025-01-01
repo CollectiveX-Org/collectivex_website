@@ -30,7 +30,7 @@ interface FormData {
     imagePreview?: string;
   }
   
-const CreateSquadModal = ({ isOpen, onClose, onNext }: CreateSquadModalProps) => {
+const CreateSquadModal = ({ isOpen, onClose}: CreateSquadModalProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -78,13 +78,13 @@ const CreateSquadModal = ({ isOpen, onClose, onNext }: CreateSquadModalProps) =>
     setCurrentStep(2);
   };
 
-  const handleReviewConfirm = () => {
-    onNext({
-      name: formData.name,
-      description: formData.description,
-      ...(formData.image ? { image: formData.image } : {})
-    });
-  };
+  // const handleReviewConfirm = () => {
+  //   onNext({
+  //     name: formData.name,
+  //     description: formData.description,
+  //     ...(formData.image ? { image: formData.image } : {})
+  //   });
+  // };
 
   return (
     <AnimatePresence>
@@ -231,7 +231,6 @@ const CreateSquadModal = ({ isOpen, onClose, onNext }: CreateSquadModalProps) =>
                   threshold: formData.threshold
                 }}
                 onBack={handleReviewBack}
-                onConfirm={handleReviewConfirm}
               />
             )}
           </motion.div>

@@ -14,10 +14,9 @@ interface ReviewProps {
     threshold: number;
   };
   onBack: () => void;
-  onConfirm: () => void;
 }
 
-const Review = ({ memberDetails, onBack, onConfirm }: ReviewProps) => {
+const Review = ({ memberDetails, onBack }: ReviewProps) => {
   const deployFee = 0.0528; // This could be fetched from an API or config
   const router = useRouter(); // Initialize useRouter
 
