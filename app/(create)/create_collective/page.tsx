@@ -27,119 +27,117 @@ const CreateCollective = () => {
 
   // If wallet is connected, show dashboard
   return (
-    <div className="min-h-screen bg-[#1C2936] p-8">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <div className="flex items-center gap-2">
-          <Image src="/soon.webp" alt="CollectiveX" width={32} height={32} />
-          <span className="text-white text-xl">CollectiveX</span>
+    <div className="min-h-screen bg-[#1C2936] p-6">
+      {/* Simplified Header */}
+      <div className="flex justify-between items-center mb-12">
+        <div className="flex items-center gap-3">
+          <Image src="/son.svg" alt="CollectiveX"
+          width={28} 
+          height={28}
+          className="w-auto h-6 group-hover:scale-105 transition-transform"
+           />
+          {/* <span className="text-white font-medium">CollectiveX</span> */}
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-            <span className="text-gray-400">Network Status</span>
-          </div>
-          <button className="bg-[#2A3744] px-4 py-2 rounded-lg text-white">
-            {publicKey?.toBase58().slice(0, 4)}...{publicKey?.toBase58().slice(-4)}
-          </button>
-        </div>
+        <button className="bg-[#2A3744]/50 px-4 py-2 rounded-full text-white/90 text-sm hover:bg-[#2A3744] transition-colors">
+          {publicKey?.toBase58().slice(0, 4)}...{publicKey?.toBase58().slice(-4)}
+        </button>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto">
-        {/* Add Create Squad Section */}
+      {/* Main Content - Simplified Layout */}
+      <div className="max-w-5xl mx-auto space-y-8">
+        {/* Modernized Hero Section */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="mb-4">
-            <Image 
-              src="/icons/CollectiveX-icon.svg" 
-              alt="CollectiveX Icon" 
-              width={64} 
-              height={64} 
-              className="mx-auto"
-            />
-          </div>
-          <h2 className="text-gray-400 mb-2">Introducing CollectiveX</h2>
-          <h1 className="text-4xl text-white font-bold mb-8">
-            Management of developer<br />
-            and treasury assets for on-chain organizations
+          {/* <Image 
+            src="/icons/CollectiveX-icon.svg" 
+            alt="CollectiveX Icon" 
+            width={48} 
+            height={48} 
+            className="mx-auto mb-6"
+          /> */}
+          <h1 className="text-3xl text-white font-bold mb-3">
+            On-chain Organization Management
           </h1>
+          <p className="text-gray-400 mb-8 max-w-lg mx-auto">
+            Streamlined treasury and developer asset management for Web3 organizations
+          </p>
           <motion.button 
-            className="bg-white text-black px-6 py-3 rounded-lg font-medium 
+            className="bg-white text-black px-6 py-2.5 rounded-lg font-medium
                      hover:bg-opacity-90 transition-all duration-200"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => setIsCreateModalOpen(true)}
           >
-            + Create Squad
+            Create Squad
           </motion.button>
         </motion.div>
 
-        {/* Balance Section */}
+        {/* Simplified Balance Section */}
         <motion.div 
-          className="bg-[#2A3744] rounded-xl p-6 mb-6"
+          className="bg-[#2A3744]/50 backdrop-blur-sm rounded-2xl p-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <div className="text-gray-400 mb-2">Total Balance</div>
-              <div className="flex items-baseline gap-4">
-                <div className="text-3xl text-white font-bold">$118,024.48</div>
-                <div className="text-green-400 text-sm">+10,000.00 last month</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <div>
+                <div className="text-gray-400 text-sm mb-1">Total Balance</div>
+                <div className="flex items-baseline gap-3">
+                  <div className="text-2xl text-white font-bold">$118,024.48</div>
+                  <div className="text-green-400 text-xs">+$10,000.00</div>
+                </div>
               </div>
-              <div className="flex gap-4 mt-4">
-                <button className="bg-white text-black px-4 py-2 rounded-lg font-medium hover:bg-opacity-90">
-                  ↑ Send
+              <div className="flex gap-2">
+                <button className="bg-white/10 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition-colors">
+                  Send
                 </button>
-                <button className="bg-white text-black px-4 py-2 rounded-lg font-medium hover:bg-opacity-90">
-                  ↓ Deposit
+                <button className="bg-white/10 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition-colors">
+                  Deposit
                 </button>
-                <button className="bg-white text-black px-4 py-2 rounded-lg font-medium hover:bg-opacity-90">
-                  ↺ Swap
+                <button className="bg-white/10 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition-colors">
+                  Swap
                 </button>
               </div>
             </div>
-            <div className="h-[200px]">
+            <div className="h-[180px]">
               <BalanceChart />
             </div>
           </div>
         </motion.div>
 
-        {/* Transaction Section */}
+        {/* Simplified Transaction Section */}
         <motion.div 
-          className="bg-[#2A3744] rounded-xl p-6"
+          className="bg-[#2A3744]/50 backdrop-blur-sm rounded-2xl p-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
-              <span className="text-purple-400">↑</span>
-              <span className="text-white">Send</span>
-              <div className="flex items-center gap-2">
-                <Image src="/sol-logo.svg" alt="SOL" width={20} height={20} />
-                <span className="text-white">196.85 SOL</span>
-              </div>
+              <Image src="/sol-logo.svg" alt="SOL" width={20} height={20} />
+              <span className="text-white">196.85 SOL</span>
+              <span className="text-gray-400 text-sm">Outgoing Transfer</span>
             </div>
-            <div className="text-yellow-400">Ready</div>
+            <div className="text-yellow-400 text-sm">Pending Approval</div>
           </div>
           
-          <div className="mb-4">
-            <div className="text-gray-400 mb-2">Progress</div>
-            <div className="w-full bg-gray-700 h-2 rounded-full">
-              <div className="bg-white w-2/3 h-full rounded-full"></div>
+          <div className="space-y-2 mb-6">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-400">Signatures</span>
+              <span className="text-white">2/3</span>
             </div>
-            <div className="text-right text-gray-400 text-sm">2/3</div>
+            <div className="w-full bg-gray-700/50 h-1.5 rounded-full">
+              <div className="bg-white/90 w-2/3 h-full rounded-full"></div>
+            </div>
           </div>
 
-          <div className="flex justify-between">
-            <button className="text-gray-400 hover:text-white">Reject</button>
-            <button className="bg-white text-black px-6 py-2 rounded-lg font-medium hover:bg-opacity-90">
+          <div className="flex justify-end gap-3">
+            <button className="text-gray-400 hover:text-white text-sm">Reject</button>
+            <button className="bg-white/90 text-black px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-white">
               Execute
             </button>
           </div>

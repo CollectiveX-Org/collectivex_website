@@ -93,118 +93,122 @@ const CreateSquadModal = ({ isOpen, onClose, onNext }: CreateSquadModalProps) =>
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 p-4"
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-[#1C2936] rounded-xl max-w-xl w-full p-6"
+            className="bg-[#1C2936] rounded-xl max-w-xl w-full p-6 shadow-xl"
           >
-            {/* Progress Steps */}
-            <div className="flex justify-center space-x-4 md:space-x-8 mb-8">
-              <div
-                className={`${
-                  currentStep === 1 ? 'text-white border-b-2 border-white' : 'text-gray-500'
-                } pb-2 whitespace-nowrap`}
-              >
-                Squad Details
-              </div>
-              <div
-                className={`${
-                  currentStep === 2 ? 'text-white border-b-2 border-white' : 'text-gray-500'
-                } pb-2 whitespace-nowrap`}
-              >
-                Members & Threshold
-              </div>
-              <div
-                className={`${
-                  currentStep === 3 ? 'text-white border-b-2 border-white' : 'text-gray-500'
-                } pb-2 whitespace-nowrap`}
-              >
-                Review
-              </div>
+            {/* Simple Progress Steps */}
+            <div className="flex justify-center space-x-12 mb-8">
+              {['Squad Details', 'Members', 'Review'].map((step, index) => (
+                <div
+                  key={step}
+                  className={`relative ${
+                    currentStep === index + 1 ? 'text-white' : 'text-gray-500'
+                  } text-sm`}
+                >
+                  {step}
+                  {currentStep === index + 1 && (
+                    <motion.div
+                      layoutId="activeStep"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-500"
+                      initial={false}
+                    />
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* Step Content */}
             {currentStep === 1 ? (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-white mb-6">Create Your Squad</h2>
-                <form className="space-y-6">
+                <h2 className="text-xl font-medium text-white">Create Your Squad</h2>
+                <form className="space-y-5">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Squad Name *</label>
+                    <label className="block text-sm text-gray-300 mb-1.5">Squad Name</label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="Enter your squad name"
-                      className="w-full p-3 bg-gray-800/50 text-white rounded-lg border border-gray-700 
-                      focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200
-                      placeholder:text-gray-500"
+                      placeholder="Enter squad name"
+                      className="w-full px-3.5 py-2.5 bg-[#2A3744] text-white rounded-lg
+                      border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 
+                      transition-colors placeholder:text-gray-500"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Description <span className="text-gray-500">(Optional)</span>
+                    <label className="block text-sm text-gray-300 mb-1.5">
+                      Description <span className="text-gray-500 text-xs">(optional)</span>
                     </label>
                     <textarea
                       name="description"
                       value={formData.description}
                       onChange={handleInputChange}
-                      placeholder="Tell us about your squad..."
-                      rows={4}
-                      className="w-full p-3 bg-gray-800/50 text-white rounded-lg border border-gray-700 
-                      focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200
-                      placeholder:text-gray-500 resize-none"
+                      placeholder="Describe your squad"
+                      rows={3}
+                      className="w-full px-3.5 py-2.5 bg-[#2A3744] text-white rounded-lg
+                      border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 
+                      transition-colors placeholder:text-gray-500 resize-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Squad Image <span className="text-gray-500">(Optional)</span>
+                    <label className="block text-sm text-gray-300 mb-1.5">
+                      Squad Image <span className="text-gray-500 text-xs">(optional)</span>
                     </label>
-                    <div className="flex items-center space-x-4">
-                      {formData.imagePreview && (
-                        <div className="relative w-20 h-20 rounded-lg overflow-hidden">
+                    <div className="flex items-center gap-4">
+                      {formData.imagePreview ? (
+                        <div className="relative w-16 h-16 rounded-lg overflow-hidden group">
                           <img 
                             src={formData.imagePreview} 
                             alt="Preview" 
                             className="w-full h-full object-cover"
                           />
+                          <button
+                            onClick={() => setFormData(prev => ({ ...prev, image: null, imagePreview: undefined }))}
+                            className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 
+                            transition-opacity flex items-center justify-center"
+                          >
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
                         </div>
-                      )}
-                      <div className="flex-1">
+                      ) : (
                         <input
                           type="file"
                           accept="image/*"
                           onChange={handleImageUpload}
-                          className="w-full p-3 bg-gray-800/50 text-white rounded-lg border border-gray-700
-                          file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
-                          file:text-sm file:font-semibold file:bg-blue-500 file:text-white
-                          hover:file:bg-blue-600 transition-all duration-200"
+                          className="w-full px-3.5 py-2.5 bg-[#2A3744] text-white rounded-lg
+                          border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30
+                          file:mr-4 file:py-2 file:px-3 file:rounded-md file:border-0
+                          file:text-sm file:bg-gray-600 file:text-white
+                          hover:file:bg-gray-500 transition-colors"
                         />
-                      </div>
+                      )}
                     </div>
                   </div>
                 </form>
 
-                <div className="flex justify-end space-x-4 pt-4">
+                <div className="flex justify-end gap-3 pt-4">
                   <button
                     onClick={onClose}
-                    className="px-6 py-2.5 rounded-lg border border-gray-600 text-gray-300 
-                    hover:bg-gray-700/50 transition-all duration-200 font-medium"
+                    className="px-4 py-2 text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSquadDetailsNext}
-                    className="px-6 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 
-                    transition-all duration-200 font-medium flex items-center space-x-2"
+                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 
+                    transition-colors text-sm flex items-center gap-2"
                   >
-                    <span>Next</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    Continue
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
