@@ -11,6 +11,7 @@ import { IoWalletOutline } from 'react-icons/io5'
 import { IoMdNotifications, IoMdSettings } from 'react-icons/io'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
+
 const navItems = [
   {
     label: 'Overview',
@@ -51,6 +52,11 @@ const navItems = [
     label: 'Managed Assets',
     icon: IoWalletOutline,
     href: '/dashboard/assets',
+  },
+  {
+    label: 'Settings',
+    icon: IoMdSettings,
+    href: '/dashboard/settings',
   },
 ]
 
