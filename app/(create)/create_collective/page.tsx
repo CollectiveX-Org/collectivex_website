@@ -31,8 +31,8 @@ const CreateCollective = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center gap-2">
-          <Image src="/icons/squads-logo.svg" alt="Squads" width={32} height={32} />
-          <span className="text-white text-xl">SQUADS</span>
+          <Image src="/soon.webp" alt="CollectiveX" width={32} height={32} />
+          <span className="text-white text-xl">CollectiveX</span>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
@@ -55,14 +55,14 @@ const CreateCollective = () => {
         >
           <div className="mb-4">
             <Image 
-              src="/icons/squads-icon.svg" 
-              alt="Squads Icon" 
+              src="/icons/CollectiveX-icon.svg" 
+              alt="CollectiveX Icon" 
               width={64} 
               height={64} 
               className="mx-auto"
             />
           </div>
-          <h2 className="text-gray-400 mb-2">Introducing Squads</h2>
+          <h2 className="text-gray-400 mb-2">Introducing CollectiveX</h2>
           <h1 className="text-4xl text-white font-bold mb-8">
             Management of developer<br />
             and treasury assets for on-chain organizations
