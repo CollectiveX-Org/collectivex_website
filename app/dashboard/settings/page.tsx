@@ -13,7 +13,7 @@ export default function SettingsPage() {
       <h1 className="text-2xl font-medium text-white mb-8">Settings</h1>
 
       {/* DAO Info Card */}
-      <div className="bg-[#161e29] rounded-xl p-6 mb-8">
+      <div className="bg-[#1a1a1a] rounded-xl p-6 mb-8">
         <div className="flex justify-between items-start mb-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-violet-500/20 rounded-lg flex items-center justify-center">
@@ -44,7 +44,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Vault Info */}
-      <div className="grid grid-cols-2 gap-6 mb-8 bg-[#161e29] rounded-xl p-6">
+      <div className="grid grid-cols-2 gap-6 mb-8 bg-[#1a1a1a] rounded-xl p-6">
         <div>
           <label className="text-sm text-gray-400 mb-2 block">Squad Vault</label>
           <div className="flex items-center gap-2 rounded-lg p-3">
@@ -66,7 +66,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-700 mb-6 bg-[#161e29] rounded-xl p-6">
+      <div className="border-b border-gray-800 mb-6 bg-[#1a1a1a] rounded-xl p-6">
         <div className="flex gap-6">
           {['Security', 'Other'].map((tab) => (
             <button
@@ -85,7 +85,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Settings Content */}
-      <div className="space-y-8 bg-[#161e29] rounded-xl p-6">
+      <div className="space-y-8 bg-[#1a1a1a] rounded-xl p-6">
         {/* Spending Limits */}
         <div>
           <div className="flex justify-between items-start mb-4">
@@ -95,7 +95,8 @@ export default function SettingsPage() {
                 Grant the member of your Squad a spending limit to withdraw funds without requiring other members approval
               </p>
             </div>
-            <button className="px-4 py-2 bg-[#161e29] text-white rounded-lg text-sm hover:bg-gray-700 transition-colors flex items-center gap-2">
+            <button className="px-4 py-2 bg-[#222222] text-white rounded-lg text-sm 
+              hover:bg-[#2a2a2a] transition-colors flex items-center gap-2">
               + Add Spending Limit
             </button>
           </div>
@@ -129,7 +130,8 @@ export default function SettingsPage() {
             <select
               value={timelock}
               onChange={(e) => setTimelock(e.target.value)}
-              className="bg-[#1F2937] text-white rounded-lg px-4 py-2 text-sm appearance-none cursor-pointer hover:bg-gray-700 transition-colors"
+              className="bg-[#222222] text-white rounded-lg px-4 py-2 text-sm 
+                appearance-none cursor-pointer hover:bg-[#2a2a2a] transition-colors"
             >
               <option value="None">None</option>
               <option value="1h">1 hour</option>

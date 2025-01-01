@@ -1,173 +1,231 @@
-'use client'
-// import { useState } from 'react'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
+"use client"
+import { useState } from 'react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  ResponsiveContainer
+} from 'recharts';
 
-const chartData = [
-  { date: 'Jan', value: 40000 },
-  { date: 'Feb', value: 55000 },
-  { date: 'Mar', value: 45000 },
-  { date: 'Apr', value: 89000 },
-  { date: 'May', value: 78000 },
-  { date: 'Jun', value: 102000 },
-]
 
-const assets = [
-  { name: 'SOL', amount: '245.5', value: '$24,550.00', icon: '/icons/sol.svg', change: '+2.4%' },
-  { name: 'USDC', amount: '50,000', value: '$50,000.00', icon: '/icons/usdc.svg', change: '0%' },
-]
+const Dashboard = () => {
+  const [balance] = useState(80.09);
+  const [members] = useState(7);
+  const [threshold] = useState('4/7');
 
-export default function DashboardHome() {
-  // const [timeRange, setTimeRange] = useState('1M')
+  // Sample data for the chart
+  const chartData = [
+    { date: 'Dec 8', value: 300 },
+    { date: 'Dec 16', value: 320 },
+    { date: 'Dec 24', value: 310 },
+    { date: 'Jan 1', value: 315 },
+  ];
+
+  // Add this sample transaction data
+  const transactions = [
+    {
+      id: 1,
+      type: 'Deposit',
+      amount: 0.56,
+      currency: 'SCHIZO',
+      sender: 'HUUK_Z8sh',
+      date: new Date('2024-04-20'),
+      time: '6:23 PM'
+    },
+    {
+      id: 2,
+      type: 'Send',
+      amount: -20000000,
+      currency: 'SCHIZO',
+      sender: 'HUUK_Z8sh',
+      date: new Date('2024-04-12'),
+      time: '7:32 PM'
+    },
+    {
+      id: 3,
+      type: 'Send',
+      amount: -20000000,
+      currency: 'SCHIZO',
+      sender: 'HUUK_Z8sh',
+      date: new Date('2024-04-12'),
+      time: '7:32 PM'
+    },
+    {
+      id: 4,
+      type: 'Send',
+      amount: -20000000,
+      currency: 'SCHIZO',
+      sender: 'HUUK_Z8sh',
+      date: new Date('2024-04-12'),
+      time: '7:32 PM'
+    }
+  ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      {/* Assets Overview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Total Balance Card */}
-        <motion.div 
-          className="lg:col-span-2 bg-[#2A3744] rounded-xl overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div className="p-6">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h3 className="text-gray-400 text-sm mb-1">Total Balance</h3>
-                <div className="text-2xl font-medium text-white">$74,550.00</div>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-green-400 text-sm">+$1,234.56</span>
-                  <span className="text-gray-500 text-sm">last 24h</span>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <button className="px-3 py-1.5 bg-violet-500/10 text-violet-200 rounded-lg text-sm hover:bg-violet-500/20 transition-colors">
-                  Send
-                </button>
-                <button className="px-3 py-1.5 bg-violet-500/10 text-violet-200 rounded-lg text-sm hover:bg-violet-500/20 transition-colors">
-                  Receive
-                </button>
-              </div>
-            </div>
-            <div className="h-[200px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData}>
-                  <defs>
-                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF' }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF' }} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: '#374151',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '12px'
-                    }}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke="#8B5CF6"
-                    fill="url(#colorValue)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </motion.div>
+    <div className="p-4 min-h-screen text-white">
+      {/* Main Overview Section */}
+      <div className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 mb-6 border border-white/5">
+        <h1 className="text-xl font-medium mb-6 flex items-center gap-2">
+          Dashboard
+          <span className="w-2.5 h-2.5 rounded-full bg-violet-500 animate-pulse"></span>
+        </h1>
 
-        {/* Assets List */}
-        <motion.div 
-          className="bg-[#2A3744] rounded-xl p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-gray-400 text-sm">Assets</h3>
-            <button className="text-violet-400 text-sm hover:text-violet-300">View All</button>
+        <div className="mb-6">
+          <h2 className="text-sm text-gray-400 mb-3 font-medium">Overview</h2>
+          
+          {/* Balance Card */}
+          <div className="bg-gray-900/60 p-6 mb-4 rounded-xl border border-violet-500/10 hover:border-violet-500/20 transition-colors">
+            <div className="mb-4">
+              <div className="text-sm text-gray-400 mb-1">Total Balance</div>
+              <div className="text-3xl font-bold tracking-tight">${balance}</div>
+            </div>
+
+            <div className="flex gap-2">
+              {['Send', 'Deposit', 'Trade'].map((action, index) => (
+                <button 
+                  key={action}
+                  className="bg-violet-500/10 hover:bg-violet-500/20 px-4 py-2 rounded-lg 
+                    flex items-center gap-2 transition-all duration-200 text-sm hover:scale-105"
+                >
+                  {index === 0 && '↑'}
+                  {index === 1 && '↓'}
+                  {index === 2 && '↗'}
+                  {action}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="space-y-4">
-            {assets.map((asset, i) => (
-              <div key={i} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-700/20 transition-colors">
-                <div className="flex items-center gap-3">
-                  <Image src={asset.icon} alt={asset.name} width={32} height={32} />
-                  <div>
-                    <div className="text-white">{asset.amount} {asset.name}</div>
-                    <div className="text-sm text-gray-400">{asset.value}</div>
-                  </div>
-                </div>
-                <div className="text-green-400 text-sm">{asset.change}</div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            {[
+              { label: 'Members', value: members },
+              { label: 'Threshold', value: threshold }
+            ].map((stat) => (
+              <div key={stat.label} 
+                className="bg-gray-900/60 p-4 rounded-xl border border-violet-500/10 
+                  hover:border-violet-500/20 transition-colors"
+              >
+                <div className="text-2xl font-bold mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
               </div>
             ))}
           </div>
-        </motion.div>
-      </div>
 
-      {/* Activity and Orders Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Active Transactions */}
-        <motion.div 
-          className="bg-[#2A3744] rounded-xl p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-medium text-white">Active Transactions</h2>
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400 text-sm">2 pending</span>
-              <button className="text-violet-400 text-sm hover:text-violet-300">View All</button>
+          {/* Chart Section */}
+          <div className="bg-gray-900/60 p-4 rounded-xl border border-violet-500/10 
+            hover:border-violet-500/20 transition-colors h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <XAxis 
+                  dataKey="date" 
+                  stroke="#666"
+                  tick={{ fill: '#666' }}
+                />
+                <YAxis 
+                  stroke="#666"
+                  tick={{ fill: '#666' }}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="value" 
+                  stroke="#8b5cf6"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Accounts Section */}
+        <div>
+          <div className="flex gap-4 mb-3">
+            {['Accounts', 'Coins', 'NFTs'].map((tab, index) => (
+              <button 
+                key={tab}
+                className={`text-sm font-medium pb-1 border-b-2 transition-colors
+                  ${index === 0 
+                    ? 'text-white border-violet-500' 
+                    : 'text-gray-400 border-transparent hover:text-gray-300'
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          <div className="bg-gray-900/60 p-4 rounded-xl border border-violet-500/10 
+            hover:border-violet-500/20 transition-colors">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center text-sm">
+                  A1
+                </div>
+                <div>
+                  <div className="text-sm font-medium">Account 1</div>
+                  <div className="text-xs text-gray-400">BRSS_gryfy</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-medium">${balance}</span>
+                <span className="text-green-500">●</span>
+              </div>
             </div>
           </div>
-          <div className="space-y-4">
-            {/* Placeholder for transactions */}
-            <div className="p-4 border border-violet-500/20 rounded-lg">
-              <div className="flex justify-between items-start mb-3">
+        </div>
+      </div>
+
+      {/* Transactions Section */}
+      <div className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 border border-white/5">
+        <h2 className="text-sm text-gray-400 mb-4 font-medium">Inflows and Outflows</h2>
+        <div className="space-y-3 max-h-[280px] overflow-y-auto pr-2">
+          {transactions.map((transaction) => (
+            <div key={transaction.id} 
+              className="bg-gray-900/60 rounded-xl p-4 border border-violet-500/10 
+                hover:border-violet-500/20 transition-colors"
+            >
+              <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="bg-violet-500/10 p-2 rounded-lg">
-                    <Image src="/icons/transfer.svg" alt="Transfer" width={20} height={20} />
-                  </div>
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-base
+                    ${transaction.type === 'Deposit' 
+                      ? 'bg-green-500/10 text-green-500' 
+                      : 'bg-red-500/10 text-red-500'
+                    }`}>
+                    {transaction.type === 'Deposit' ? '↓' : '↑'}
+                  </span>
                   <div>
-                    <div className="text-white">Send 50 SOL</div>
-                    <div className="text-sm text-gray-400">2/3 signatures</div>
+                    <div className="text-sm font-medium">{transaction.type}</div>
+                    <div className="text-xs text-gray-400">Type</div>
                   </div>
                 </div>
-                <div className="text-sm text-gray-400">2 hours ago</div>
+                <div className="text-right">
+                  <div className={`text-sm font-medium ${
+                    transaction.amount > 0 ? 'text-green-500' : 'text-red-500'
+                  }`}>
+                    {transaction.amount > 0 ? '+' : ''}{transaction.amount} {transaction.currency}
+                  </div>
+                  <div className="text-xs text-gray-400">Amount</div>
+                </div>
               </div>
-              <div className="w-full bg-gray-700/50 h-1.5 rounded-full">
-                <div className="bg-violet-500 w-2/3 h-full rounded-full"></div>
+              
+              <div className="flex items-center justify-between pt-2 border-t border-gray-800">
+                <div>
+                  <div className="text-sm font-medium">{transaction.sender}</div>
+                  <div className="text-xs text-gray-400">Sender</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm font-medium">{transaction.time}</div>
+                  <div className="text-xs text-gray-400">Time</div>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-
-        {/* Limit Orders */}
-        <motion.div 
-          className="bg-[#2A3744] rounded-xl p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-medium text-white">Limit Orders</h2>
-            <button className="px-3 py-1.5 bg-violet-500/10 text-violet-200 rounded-lg text-sm hover:bg-violet-500/20 transition-colors">
-              New Order
-            </button>
-          </div>
-          <div className="text-center py-8 text-gray-400">
-            <div className="mb-2">No active limit orders</div>
-            <button className="text-violet-400 text-sm hover:text-violet-300">
-              Create your first limit order
-            </button>
-          </div>
-        </motion.div>
+          ))}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Dashboard;

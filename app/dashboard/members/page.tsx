@@ -68,7 +68,7 @@ export default function MembersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-[#2A3744] rounded-xl p-4"
+            className="bg-gray-900/60 rounded-xl p-4"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -109,7 +109,7 @@ export default function MembersPage() {
       {/* Modules Section */}
       <div className="mt-8">
         <h2 className="text-sm text-gray-400 mb-4">Modules</h2>
-        <button className="w-full max-w-sm px-4 py-3 bg-[#2A3744] rounded-xl text-left text-white hover:bg-gray-700/50 transition-colors flex items-center justify-between">
+        <button className="w-full max-w-sm px-4 py-3 bg-gray-900/60 rounded-xl text-left text-white hover:bg-gray-900/70 transition-colors flex items-center justify-between">
           <span>Add SquadsX</span>
           <FiPlus size={16} />
         </button>

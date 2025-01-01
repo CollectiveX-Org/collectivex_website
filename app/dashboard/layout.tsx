@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
-import { MdDashboard, MdSwapHoriz, MdWaterDrop, MdSend, MdRefresh } from 'react-icons/md'
-import { FaStream, FaExchangeAlt } from 'react-icons/fa'
+import { MdDashboard, MdSwapHoriz, MdSend, MdRefresh } from 'react-icons/md'
+// import { FaStream, FaExchangeAlt } from 'react-icons/fa'
 import { BiTransfer, BiUserPlus } from 'react-icons/bi'
-import { IoWalletOutline } from 'react-icons/io5'
+// import { IoWalletOutline } from 'react-icons/io5'
 import { IoMdNotifications, IoMdSettings } from 'react-icons/io'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
@@ -18,41 +18,41 @@ const navItems = [
     icon: MdDashboard,
     href: '/dashboard',
   },
-  {
-    label: 'Limit Order',
-    icon: FaExchangeAlt,
-    href: '/dashboard/limit-order',
-  },
+  // {
+  //   label: 'Limit Order',
+  //   icon: FaExchangeAlt,
+  //   href: '/dashboard/limit-order',
+  // },
   {
     label: 'Members',
     icon: BiUserPlus,
     href: '/dashboard/members',
   },
-  {
-    label: 'Streams',
-    icon: FaStream,
-    href: '/dashboard/streams',
-  },
+  // {
+  //   label: 'Streams',
+  //   icon: FaStream,
+  //   href: '/dashboard/streams',
+  // },
   {
     label: 'Active Transactions',
     icon: BiTransfer,
     href: '/dashboard/transaction',
   },
-  {
-    label: 'Send',
-    icon: MdSend,
-    href: '/dashboard/send',
-  },
-  {
-    label: 'Stake',
-    icon: MdWaterDrop,
-    href: '/dashboard/stake',
-  },
-  {
-    label: 'Managed Assets',
-    icon: IoWalletOutline,
-    href: '/dashboard/assets',
-  },
+  // {
+  //   label: 'Send',
+  //   icon: MdSend,
+  //   href: '/dashboard/send',
+  // },
+  // {
+  //   label: 'Stake',
+  //   icon: MdWaterDrop,
+  //   href: '/dashboard/stake',
+  // },
+  // {
+  //   label: 'Managed Assets',
+  //   icon: IoWalletOutline,
+  //   href: '/dashboard/assets',
+  // },
   {
     label: 'Settings',
     icon: IoMdSettings,
