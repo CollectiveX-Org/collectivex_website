@@ -5,11 +5,54 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp, MdWarning, MdContentCopy } from
 import { BiSend, BiUserPlus } from 'react-icons/bi'
 import { FiExternalLink } from 'react-icons/fi'
 
+// Add these interfaces at the top of the file
+interface TransactionProgress {
+  status: 'Voting' | 'Executed'
+  approvals: string
+  confirmed: {
+    count: number
+    by: string | string[]
+  }
+  rejected: {
+    count: number
+  }
+}
+
+interface BaseTransaction {
+  id: number
+  type: 'Send' | 'Add Member'
+  time: string
+  date: string
+  status: 'Active' | 'Executed'
+  info: {
+    author: string
+    createdOn: string
+    executedOn?: string
+    transactionLink?: string
+    account?: string
+  }
+  progress: TransactionProgress
+}
+
+interface SendTransaction extends BaseTransaction {
+  type: 'Send'
+  amount: string
+  token: string
+  recipient: string
+}
+
+interface AddMemberTransaction extends BaseTransaction {
+  type: 'Add Member'
+  target: string
+}
+
+type Transaction = SendTransaction | AddMemberTransaction
+
 // Mock transaction data
-const transactions = [
+const transactions: Transaction[] = [
   {
     id: 1,
-    type: 'Send',
+    type: 'Send' as const,
     amount: '999,999',
     token: 'SCHIZO',
     recipient: 'schizardio.sol',
@@ -35,7 +78,7 @@ const transactions = [
   },
   {
     id: 2,
-    type: 'Add Member',
+    type: 'Add Member' as const,
     target: '4uGo...iTjP',
     time: '2:07 AM',
     date: 'Mar 12, 2024',
@@ -58,12 +101,12 @@ const transactions = [
       }
     }
   }
-]
+] as const
 
 export default function TransactionsPage() {
   const [expandedId, setExpandedId] = useState<number | null>(null)
 
-  const renderTransactionHeader = (tx: any) => {
+  const renderTransactionHeader = (tx: Transaction) => {
     if (tx.type === 'Send') {
       return (
         <>
@@ -96,7 +139,7 @@ export default function TransactionsPage() {
     }
   }
 
-  const renderExpandedContent = (tx: any) => {
+  const renderExpandedContent = (tx: Transaction) => {
     if (tx.type === 'Send') {
       return (
         <>
@@ -204,9 +247,13 @@ export default function TransactionsPage() {
                 <div className="text-white">Voting</div>
                 <div className="text-sm text-gray-400">{tx.progress.approvals}</div>
                 <div className="mt-2">
-                  {tx.progress.confirmed.by.map((signer: string, i: number) => (
-                    <div key={i} className="text-sm text-gray-400">{signer}</div>
-                  ))}
+                  {Array.isArray(tx.progress.confirmed.by) ? (
+                    tx.progress.confirmed.by.map((signer: string, i: number) => (
+                      <div key={i} className="text-sm text-gray-400">{signer}</div>
+                    ))
+                  ) : (
+                    <div className="text-sm text-gray-400">{tx.progress.confirmed.by}</div>
+                  )}
                 </div>
               </div>
               <div className="relative pl-6">

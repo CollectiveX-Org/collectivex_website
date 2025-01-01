@@ -1,5 +1,4 @@
 'use client'
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MdContentCopy } from 'react-icons/md'
 import { FiPlus } from 'react-icons/fi'
