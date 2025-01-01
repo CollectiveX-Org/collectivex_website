@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // import Image from 'next/image'
 import MembersThresholdStep from './MembersThresholdStep';
+import Review from './Review';
 
 interface CreateSquadModalProps {
   isOpen: boolean;
@@ -70,6 +71,14 @@ const CreateSquadModal = ({ isOpen, onClose, onNext }: CreateSquadModalProps) =>
 
   const handleMembersThresholdNext = (data: { members: Member[]; threshold: number }) => {
     setFormData((prev) => ({ ...prev, ...data }));
+    setCurrentStep(3);
+  };
+
+  const handleReviewBack = () => {
+    setCurrentStep(2);
+  };
+
+  const handleReviewConfirm = () => {
     onNext({
       name: formData.name,
       description: formData.description,
@@ -207,9 +216,19 @@ const CreateSquadModal = ({ isOpen, onClose, onNext }: CreateSquadModalProps) =>
                 onNext={handleMembersThresholdNext}
               />
             ) : (
-              <div>
-                <p>Review Step Placeholder</p>
-              </div>
+              <Review
+                squadDetails={{
+                  name: formData.name,
+                  description: formData.description,
+                  imageUrl: formData.imagePreview
+                }}
+                memberDetails={{
+                  members: formData.members,
+                  threshold: formData.threshold
+                }}
+                onBack={handleReviewBack}
+                onConfirm={handleReviewConfirm}
+              />
             )}
           </motion.div>
         </motion.div>
